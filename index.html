@@ -288,7 +288,7 @@
 <p>He said prices must be marked up to at least three times the cost to deliver (excluding overheads) or a business would struggle. As a basic example, if your e-shop buys a product for $100, sell it for $300.</p>
 <p>McAdam stressed the need for business owners to pay themselves a wage for their work, and aim for a 20 per cent annual profit after expenses (including their wage).</p>
 <p>He challenged attendees to take action on at least one of the five way to increase profit.</p>
-<p>Like podcaster Cosentino, McAdam has published his talk at his website so I won&rsquo;t steal any more of his thunder either. Check it out at <a href="https://benmcadam.me/wcbne/">https://benmcadam.me/wcbne/</a>.</p>
+<p><a href="https://wordpress.tv/2018/11/26/ben-mcadam-know-your-numbers-increase-your-profits-and-stress-less/">>> Watch McAdam's presentation here</a>.</p>
 <div class="alert alert-success" role="alert">
 <p><strong>MTCW:</strong> Like I wrote, Tim Ferriss's self-help bestseller, The 4-Hour Workweek, came up a few times from different speakers.</p>
 <p>Automate ... 80/20 rule ... Charge more, do less &hellip; Outsource &hellip; Etc, etc ...<br /><br />But where are all these successful work-grind rejecters? Maybe I've missed them because I'm not by a Bali beach at 11.30am on a Tuesday sipping Mai Tais while my team of poorly paid, yet highly competent, freelance workers beaver away with little supervision but much dedication?What Ferriss did brilliantly, however, was identify a pain point and promise a solution. The nearly 1.5 million dejected drones who bought his book wanted to believe in an escape from their corporate servitude. He offered them hope. A variation on, '"How to Own 10 Houses and Say Goodbye to Your Boss Forever". <br /><br />The title of Ferriss's book alone is pure genius. The 4-Hour Workweek: Escape 9-5, Live Anywhere, and Join the New Rich. It hits every mark.<br /><br />The 4-Hour Workweek shows the power of a problem to solve and a killer headline.</p>
@@ -297,9 +297,15 @@
 <p>You know that feeling when something goes seriously badly wrong at work? Developer Phillip Johnson sure does.</p>
 <p>Phillip works for the Bolster agency in Melbourne, which, to quote its website, specialises in &ldquo;digital, creative and content for the music, events and entertainment industries&rdquo;.</p>
 <p>One of their big gigs is Groovin the Moo, a music festival held annually over three weekends in six regional centres across Australia. Back in January 2017 after a holiday in India, Phillip lobbed back at the office a couple of days before the main website for that year&rsquo;s festival was set to be propelled at the public.</p>
+
+<h4>Static site</h4>
+
 <p>As is typical for festivals such as Groovin the Moo, the promoters build excitement and anticipation over the line-up of performers and then, when it&rsquo;s time for the big reveal, a media and marketing blitz creates a stampede of traffic to the website, where can be found all the thrilling (and complex, information architecture-wise) details.</p>
 <p>Before that moment, the festival is represented online by just a bare-bones static site with branding and little else.</p>
 <p>Now remember, Phillip has been on vacation. &ldquo;The guy at the time decided, cool, what we'll do is the client will connect to a load balancer, that load balancer will then have multiple EC2 instances on AWS and those EC2 instances will have an RDS database and have all our uploads going to an S3 bucket.&rdquo;</p>
+
+<hr>
+<strong>
 <p>QUICK EXPLAINER: Phillip was describing the web server setup for Groovin the Moo on Amazon Web Services - that&rsquo;s the &ldquo;AWS&rdquo; bit.</p>
 <p>More decoding for the non-techies:</p>
 <ul>
@@ -310,10 +316,16 @@
 <li>S3: Amazon cloud storage service.</li>
 </ul>
 <p>Also, keep reading and he&rsquo;ll mention &ldquo;SQL&rdquo; - that&rsquo;s a programming language for storing, manipulating and retrieving data in databases.</p>
+</strong>
+<hr>
+
 <p>Phillip said: &ldquo;Fortunately, before any of these sites go live it's usually got a static web page, so we had just hosted that in an S3 bucket and our plan for the launch was we would have the load balancer point to the one EC2 instance that's got the static page and then we'll just switch it over, point to the multiple instances and there'll be zero downtime.<br /><br />&ldquo;At least that was the plan,&rdquo; he said, ominously.</p>
 <p>At 8am on launch day, they &ldquo;flick the switch&rdquo; to the superduper important main website and ... and ... and &hellip; a weird pic of a butterfly appears where their website should be.</p>
 <p>&ldquo;We had an influx of 16,500 users between the hours of 8am and 9am. Previously there was maybe 300 users on the site. So we had gone through and built a site that couldn't handle the traffic that we've got.&rdquo;</p>
 <p>Crickey! What went wrong?.</p>
+
+<h4>Can't handle the queries</h4>
+
 <p>Bolster had built the project with ease-of-use for the owners as a priority, whereby the festival organisers could &ldquo;enter the content once and reuse it across the site&rdquo;.</p>
 <p>To this end, a lot of custom post types and Advanced Custom Fields relationships were deployed.</p>
 <p>&ldquo;This was actually our downfall.</p>
@@ -322,10 +334,16 @@
 <p>But they nutted out a solution. &ldquo;We had to spend a couple of days optimising these queries &hellip; we had to spin up larger EC2 instances so they could handle the CPU and then essentially wait until the traffic died down on the site so we could actually launch it and cache the page.&rdquo;</p>
 <p>Phew! Festival saved.</p>
 <p>Bolster remained keen on the enter-once approach, though, so Phillip &ldquo;spent pretty much the next year going through all our touring sites and our festival sites taking a look at how they were built and what we could do better&rdquo;.</p>
+
+<h4>Objects not actions</h4>
+
 <p>His solution - object-oriented programming and model&ndash;view&ndash;controller.</p>
 <p>A little web-searching informed your intrepid writer that OOP was &ldquo;organised around objects rather than &lsquo;actions&rsquo; and data rather than logic&rdquo;.</p>
 <p>As for MVC, it&rsquo;s &ldquo;a methodology or design pattern for successfully and efficiently relating the user interface to underlying data models&rdquo;.</p>
 <p>Phillip said: &ldquo;You essentially split out the logic so you've got your styles in one section, your HTML markup in one section, you set up your models, which handles the data between the database and then you've got a controller which just says, &lsquo;Cool, get this data, put it on this page&rsquo;.&rdquo; The programmers in the audience nodded knowingly.&nbsp;</p>
+
+<h4>Open-source tools</h4>
+
 <p>Bolster also decided to change the way they deployed sites, enlisting Roots.io and its stack of open-source tools and resources for WordPress development.&nbsp;</p>
 <p>According to the Roots.io website, these tools include:</p>
 <ul>
@@ -336,12 +354,18 @@
 <p>Phillip said: &ldquo;Trellis uses Ansible playbooks to essentially allow you to provision all of your servers and deploy all the code all through the command line (rather than a user interface).</p>
 <p>&ldquo;So, all I need to do now when I want to go through and set up a server, I jump on to Digital Ocean (which is similar to AWS), spin up a new clean instance, make sure my SSH key&rsquo;s in there and, then, one command and it goes through, installs SQL, the right version of PHP.</p>
 <p>&ldquo;And then if I need to go from staging to development I just change one line of code.&rdquo;</p>
+
+<h4>Template engine</h4>
+
 <p>Also in the Bolster development toolkit are Timber and its template engine, Twig.</p>
 <p>From the Timber website: &ldquo;With Timber you manage your theme in PHP and Twig (HTML) files. This separates the logic (getting stuff from WordPress) from presentation (adding tags, classes, etc.) &mdash; just like Rails, Django, Node and other platforms.&rdquo;</p>
 <p>Phillip said about Timber: &ldquo;It's already got the concept of MVC built into it.&rdquo;</p>
 <p>Timber says on its website, &ldquo;WordPress is awesome, but the loop isn&rsquo;t&rdquo;. WordPress makes extensive use of the PHP &lsquo;while loop&rsquo; command, which executes a block of code as long as the specified condition is true.</p>
 <p>Showing the WordPress Index.php file in a Timber/Twig setup as an example, Phillip said: &ldquo;It's very similar to the original Index.php but you don't have to run through &lsquo;while loops&rsquo;, you're not trying to query the database from your theme file.</p>
 <p>&ldquo;The other advantage with Timber is you've got these caches.&rdquo;</p>
+
+<h4>Cache is king</h4>
+
 <p>The folk at WebsiteOptimization.com have a good explanation of caching: &ldquo;Caching is the temporary storage of frequently accessed data in higher speed media &hellip; for more efficient retrieval. Web caching stores frequently used objects closer to the client through browser, proxy, or server caches. By storing &lsquo;fresh&rsquo; objects closer to your users, you avoid round trips to the origin server, reducing bandwidth consumption, server load, and most importantly, latency.&rdquo;</p>
 <p>Phillip said that Timber facilitated three forms of caching:&nbsp;</p>
 <ul>
@@ -354,6 +378,9 @@
 <p>Phillip said: &ldquo;We ended up going down the route of using an object cache and because I'd gone through and created all these classes with all my post types, I created an object cache, all those variables that I had set in in the functions were now cached.</p>
 <p>&ldquo;So any time an artist was called, it loaded once, it cached it, and then it served the cache<br />file for every other time that people access the information.</p>
 <p>&ldquo;The advantage of that then is that you're not hitting the database, which means that all the<br />problems we had Groovin the Moo were resolved.&rdquo;</p>
+
+<h4>Small but mighty</h4>
+
 <p>Phillip tested his new processes on last year&rsquo;s Spilt Milk festival website, which, unplanned, was stuck on the smallest AWS account available.</p>
 <p>In the hour from 7am on launch day the Spilt Milk site had no users. At 8am it roared up to 5500 visitors and sat between 30-40 per cent of the allowed CPU for most of the day.&nbsp;</p>
 <p>&ldquo;Basically, throughout the entire day we had 60,000 users. I was running a full festival website on a five dollar-a-month instance.&rdquo;</p>
